@@ -9,6 +9,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'http://chuross.github.com/maven-repository/' }
         jcenter()
     }
 }

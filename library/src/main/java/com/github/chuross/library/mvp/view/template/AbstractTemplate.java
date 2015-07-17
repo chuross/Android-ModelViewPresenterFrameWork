@@ -11,9 +11,9 @@ public abstract class AbstractTemplate implements Template {
     private View view;
 
     /**
-     * use layout resource id
+     * This constructor is not usually used.
+     * For example, View was already inflated. etc...
      */
-    @Deprecated
     public AbstractTemplate(@NonNull View view) {
         this.view = view;
     }

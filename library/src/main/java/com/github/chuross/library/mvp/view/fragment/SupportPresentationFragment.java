@@ -7,10 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.github.chuross.library.mvp.presenter.V4FragmentPresenter;
+import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
 import com.github.chuross.library.mvp.view.template.Template;
 
-public abstract class V4PresentationFragment<PRESENTER extends V4FragmentPresenter<?, TEMPLATE>, TEMPLATE extends Template> extends Fragment {
+public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?, TEMPLATE>, TEMPLATE extends Template> extends Fragment {
 
     private PRESENTER presenter;
 

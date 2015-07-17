@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import com.github.chuross.library.mvp.view.template.Template;
 
-public class V4FragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extends Template> implements Presenter<FRAGMENT> {
+public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extends Template> implements Presenter<FRAGMENT> {
 
     private FRAGMENT fragment;
     private TEMPLATE template;
     private boolean destroyed = false;
 
-    public V4FragmentPresenter(FRAGMENT fragment) {
+    public SupportFragmentPresenter(FRAGMENT fragment) {
         this.fragment = fragment;
     }
 

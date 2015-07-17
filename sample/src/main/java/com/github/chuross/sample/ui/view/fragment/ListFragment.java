@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.github.chuross.library.mvp.view.adapter.TemplateArrayAdapter;
-import com.github.chuross.library.mvp.view.fragment.V4PresentationFragment;
+import com.github.chuross.library.mvp.view.fragment.SupportPresentationFragment;
 import com.github.chuross.sample.domain.Item;
 import com.github.chuross.sample.ui.presenter.ListPresenter;
 import com.github.chuross.sample.ui.view.template.ListItemTemplate;
@@ -19,7 +19,7 @@ import rx.functions.Action1;
 
 import java.util.List;
 
-public class ListFragment extends V4PresentationFragment<ListPresenter, ListTemplate> {
+public class ListFragment extends SupportPresentationFragment<ListPresenter, ListTemplate> {
 
     private static final String ARGUMENT_KEY_TITLE = "argument_key_title";
 

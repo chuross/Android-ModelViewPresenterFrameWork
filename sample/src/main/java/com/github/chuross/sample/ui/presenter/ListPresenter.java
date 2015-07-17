@@ -2,7 +2,7 @@ package com.github.chuross.sample.ui.presenter;
 
 import android.app.Application;
 import android.widget.Toast;
-import com.github.chuross.library.mvp.presenter.V4FragmentPresenter;
+import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
 import com.github.chuross.sample.domain.Item;
 import com.github.chuross.sample.domain.ItemRepository;
 import com.github.chuross.sample.ui.view.fragment.ListFragment;
@@ -11,7 +11,7 @@ import rx.Observable;
 
 import java.util.List;
 
-public class ListPresenter extends V4FragmentPresenter<ListFragment, ListTemplate> {
+public class ListPresenter extends SupportFragmentPresenter<ListFragment, ListTemplate> {
 
     private ItemRepository itemRepository = new ItemRepository();
 

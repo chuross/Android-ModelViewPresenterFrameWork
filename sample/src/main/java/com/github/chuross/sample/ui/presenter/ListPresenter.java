@@ -28,8 +28,8 @@ public class ListPresenter extends SupportFragmentPresenter<ListFragment, ListTe
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void destroyView() {
+        super.destroyView();
         subscriptions.unsubscribe();
     }
 

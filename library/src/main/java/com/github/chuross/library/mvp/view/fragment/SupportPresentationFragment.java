@@ -24,30 +24,42 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = createPresenter();
-        presenter.onCreate(savedInstanceState);
+        presenter.create(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        return presenter.onCreateView(createTemplate(container, savedInstanceState));
+        return presenter.createView(createTemplate(container, savedInstanceState));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.start();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        presenter.onResume();
+        presenter.resume();
     }
 
     @Override
     public void onPause() {
-        presenter.onPause();
+        presenter.pause();
         super.onPause();
     }
 
     @Override
+    public void onStop() {
+        presenter.stop();
+        super.onStop();
+    }
+
+    @Override
     public void onDestroyView() {
-        presenter.onDestroyView();
+        presenter.destroyView();
         super.onDestroyView();
     }
 

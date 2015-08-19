@@ -17,27 +17,31 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
         this.fragment = fragment;
     }
 
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void create(@Nullable Bundle savedInstanceState) {
     }
 
-    public View onCreateView(@NonNull TEMPLATE template) {
+    public View createView(@NonNull TEMPLATE template) {
         this.template = template;
         return template.getView();
     }
 
-    public void onResume() {
+    public void start() {
     }
 
-    public void onPause() {
+    public void resume() {
     }
 
-    public void onDestroyView() {
+    public void pause() {
+    }
+
+    public void stop() {
+    }
+
+    public void destroyView() {
     }
 
     public void onDestroy() {
         destroyed = true;
-        fragment = null;
-        template = null;
     }
 
     @NonNull

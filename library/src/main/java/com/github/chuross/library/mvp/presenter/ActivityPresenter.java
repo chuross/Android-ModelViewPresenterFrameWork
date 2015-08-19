@@ -30,21 +30,31 @@ public class ActivityPresenter<ACTIVITY extends Activity, TEMPLATE extends Templ
         return template;
     }
 
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void create(@Nullable Bundle savedInstanceState) {
+    }
+
+    public void start() {
+    }
+
+    public void resume() {
     }
 
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         return false;
     }
 
-    public boolean onBackPressed() {
+    public boolean backPress() {
         return false;
+    }
+
+    public void pause() {
+    }
+
+    public void stop() {
     }
 
     public void destroy() {
         destroyed = true;
-        activity = null;
-        template = null;
     }
 
     public boolean isDestroyed() {

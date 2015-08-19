@@ -18,7 +18,19 @@ public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = createPresenter();
-        presenter.onCreate(savedInstanceState);
+        presenter.create(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.resume();
     }
 
     @Override
@@ -28,9 +40,21 @@ public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?
 
     @Override
     public void onBackPressed() {
-        if(!presenter.onBackPressed()) {
+        if(!presenter.backPress()) {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        presenter.pause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        presenter.stop();
+        super.onStop();
     }
 
     @Override

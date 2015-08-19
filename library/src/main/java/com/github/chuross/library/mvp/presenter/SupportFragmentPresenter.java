@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import com.github.chuross.library.mvp.view.template.Template;
 
-public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extends Template> implements Presenter<FRAGMENT> {
+public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extends Template> implements TemplatePresenter<FRAGMENT, TEMPLATE> {
 
     private FRAGMENT fragment;
     private TEMPLATE template;
     private boolean destroyed = false;
 
-    public SupportFragmentPresenter(FRAGMENT fragment) {
+    public SupportFragmentPresenter(@NonNull FRAGMENT fragment) {
         this.fragment = fragment;
     }
 
@@ -25,6 +25,12 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
         return template.getView();
     }
 
+    public void onResume() {
+    }
+
+    public void onPause() {
+    }
+
     public void onDestroyView() {
     }
 
@@ -34,12 +40,13 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
         template = null;
     }
 
-    @Override
     @NonNull
+    @Override
     public FRAGMENT getView() {
         return fragment;
     }
 
+    @Override
     public TEMPLATE getTemplate() {
         return template;
     }

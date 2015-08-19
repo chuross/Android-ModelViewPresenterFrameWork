@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import com.github.chuross.library.mvp.view.template.Template;
 
-public class ActivityPresenter<ACTIVITY extends Activity, TEMPLATE extends Template> implements Presenter<ACTIVITY> {
+public class ActivityPresenter<ACTIVITY extends Activity, TEMPLATE extends Template> implements TemplatePresenter<ACTIVITY, TEMPLATE> {
 
     private ACTIVITY activity;
     private TEMPLATE template;
@@ -18,13 +18,14 @@ public class ActivityPresenter<ACTIVITY extends Activity, TEMPLATE extends Templ
         this.template = template;
     }
 
-    @Override
     @NonNull
+    @Override
     public ACTIVITY getView() {
         return activity;
     }
 
     @NonNull
+    @Override
     public TEMPLATE getTemplate() {
         return template;
     }

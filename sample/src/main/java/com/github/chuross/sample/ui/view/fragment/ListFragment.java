@@ -1,5 +1,6 @@
 package com.github.chuross.sample.ui.view.fragment;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +15,8 @@ import com.github.chuross.sample.domain.Item;
 import com.github.chuross.sample.ui.presenter.ListPresenter;
 import com.github.chuross.sample.ui.view.template.ListItemTemplate;
 import com.github.chuross.sample.ui.view.template.ListTemplate;
-import rx.android.app.AppObservable;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
             }
         };
 
-        ListTemplate template = getPresenter().getTemplate();
+        final ListTemplate template = getPresenter().getTemplate();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             template.getList().setNestedScrollingEnabled(true);
         }
@@ -68,7 +69,7 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
             }
         });
 
-        AppObservable.bindSupportFragment(this, getPresenter().getItems()).subscribe(new Action1<List<Item>>() {
+        getPresenter().subscribeGetItems(Schedulers.from(AsyncTask.SERIAL_EXECUTOR), new Action1<List<Item>>() {
             @Override
             public void call(final List<Item> items) {
                 adapter.addAll(items);

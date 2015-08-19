@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.github.chuross.library.mvp.view.activity.PresentationActivity;
 import com.github.chuross.sample.ui.presenter.MainPresenter;
@@ -33,7 +33,7 @@ public class MainActivity extends PresentationActivity<MainPresenter> {
 
         final List<String> titles = getPresenter().getTitles();
 
-        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(final int position) {
                 return ListFragment.create(titles.get(position));

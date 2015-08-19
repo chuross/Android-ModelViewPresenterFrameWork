@@ -24,6 +24,6 @@ public class ListItemTemplate extends AbstractListAdapterTemplate<Item> {
 
     @Override
     public void apply(final Item item) {
-        titleText.setText(String.format("title=%s : position=%d", title, Item.getIdentityValue(item)));
+        titleText.setText(String.format("title=%s : identity=%d", title, Item.getIdentityValue(item)));
     }
 }

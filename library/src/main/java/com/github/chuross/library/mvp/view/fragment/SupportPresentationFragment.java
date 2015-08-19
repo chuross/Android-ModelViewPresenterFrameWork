@@ -34,15 +34,27 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.onPause();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroyView() {
-        super.onDestroyView();
         presenter.onDestroyView();
+        super.onDestroyView();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         presenter.onDestroy();
+        super.onDestroy();
     }
 
     public PRESENTER getPresenter() {

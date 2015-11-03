@@ -19,6 +19,7 @@ public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?
         super.onCreate(savedInstanceState);
         presenter = createPresenter();
         presenter.create(savedInstanceState);
+        setContentView(presenter.getTemplate().getView());
     }
 
     @Override

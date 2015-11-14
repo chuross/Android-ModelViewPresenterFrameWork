@@ -34,7 +34,7 @@ dependencies {
     compile project(':library')
 
     // common
-    compile('com.chuross:common-library:0.1.4') {
+    compile('com.github.chuross:common-library:1.0.1') {
         exclude module: 'stax'
         exclude module: 'stax-api'
         exclude module: 'xpp3'

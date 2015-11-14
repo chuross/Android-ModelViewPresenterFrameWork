@@ -11,18 +11,25 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
 
     private FRAGMENT fragment;
     private TEMPLATE template;
-    private boolean destroyed = false;
+    private boolean viewDestroyed;
+    private boolean destroyed;
 
     public SupportFragmentPresenter(@NonNull FRAGMENT fragment) {
         this.fragment = fragment;
     }
 
     public void create(@Nullable Bundle savedInstanceState) {
+        destroyed = false;
     }
 
     public View createView(@NonNull TEMPLATE template) {
+        viewDestroyed = false;
+
         this.template = template;
         return template.getView();
+    }
+
+    public void viewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     }
 
     public void start() {
@@ -38,9 +45,10 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
     }
 
     public void destroyView() {
+        viewDestroyed = true;
     }
 
-    public void onDestroy() {
+    public void destroy() {
         destroyed = true;
     }
 
@@ -53,6 +61,10 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
     @Override
     public TEMPLATE getTemplate() {
         return template;
+    }
+
+    public boolean isViewDestroyed() {
+        return viewDestroyed;
     }
 
     public boolean isDestroyed() {

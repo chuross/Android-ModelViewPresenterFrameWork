@@ -27,10 +27,16 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
         presenter.create(savedInstanceState);
     }
 
-    @Nullable
+    @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return presenter.createView(createTemplate(container, savedInstanceState));
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.viewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -65,7 +71,7 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
 
     @Override
     public void onDestroy() {
-        presenter.onDestroy();
+        presenter.destroy();
         super.onDestroy();
     }
 

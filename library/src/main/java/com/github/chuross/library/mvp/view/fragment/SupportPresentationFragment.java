@@ -33,10 +33,18 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
         return presenter.createView(createTemplate(container, savedInstanceState));
     }
 
+    /**
+     * use onViewCreated(TEMPLATE template, Bundle savedInstanceState)
+     */
     @Override
+    @Deprecated
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.viewCreated(view, savedInstanceState);
+        presenter.viewCreated(presenter.getTemplate(), savedInstanceState);
+        onViewCreated(presenter.getTemplate(), savedInstanceState);
+    }
+
+    public void onViewCreated(@NonNull TEMPLATE template, @Nullable Bundle savedInstanceState) {
     }
 
     @Override

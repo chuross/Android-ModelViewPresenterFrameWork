@@ -45,8 +45,8 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
     }
 
     @Override
-    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull final ListTemplate template, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(template, savedInstanceState);
 
         final String title = getArguments().getString(ARGUMENT_KEY_TITLE);
 
@@ -57,7 +57,6 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
             }
         };
 
-        final ListTemplate template = getPresenter().getTemplate();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             template.getList().setNestedScrollingEnabled(true);
         }

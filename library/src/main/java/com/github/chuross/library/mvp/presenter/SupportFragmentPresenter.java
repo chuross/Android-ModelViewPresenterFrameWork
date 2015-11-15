@@ -29,7 +29,7 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
         return template.getView();
     }
 
-    public void viewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void viewCreated(@NonNull TEMPLATE template, @Nullable Bundle savedInstanceState) {
     }
 
     public void start() {

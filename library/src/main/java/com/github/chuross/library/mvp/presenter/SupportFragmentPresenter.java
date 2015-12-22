@@ -5,9 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.ViewGroup;
 import com.github.chuross.library.mvp.view.template.Template;
 
-public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extends Template> implements TemplatePresenter<FRAGMENT, TEMPLATE> {
+public abstract class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extends Template> implements TemplatePresenter<FRAGMENT, TEMPLATE> {
 
     private FRAGMENT fragment;
     private TEMPLATE template;
@@ -18,18 +19,19 @@ public class SupportFragmentPresenter<FRAGMENT extends Fragment, TEMPLATE extend
         this.fragment = fragment;
     }
 
+    protected abstract TEMPLATE createTemplate(@NonNull ViewGroup parent, @Nullable Bundle savedInstanceState);
+
     public void create(@Nullable Bundle savedInstanceState) {
         destroyed = false;
     }
 
-    public View createView(@NonNull TEMPLATE template) {
+    public View createView(@NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
         viewDestroyed = false;
-
-        this.template = template;
+        this.template = createTemplate(parent, savedInstanceState);
         return template.getView();
     }
 
-    public void viewCreated(@NonNull TEMPLATE template, @Nullable Bundle savedInstanceState) {
+    public void viewCreated(@Nullable Bundle savedInstanceState) {
     }
 
     public void start() {

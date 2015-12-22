@@ -1,6 +1,10 @@
 package com.github.chuross.sample.ui.presenter;
 
 import android.app.Application;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.ViewGroup;
 import android.widget.Toast;
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
 import com.github.chuross.sample.domain.Item;
@@ -25,6 +29,11 @@ public class ListPresenter extends SupportFragmentPresenter<ListFragment, ListTe
 
     public ListPresenter(final ListFragment fragment) {
         super(fragment);
+    }
+
+    @Override
+    protected ListTemplate createTemplate(@NonNull final ViewGroup parent, @Nullable final Bundle savedInstanceState) {
+        return new ListTemplate(getView().getActivity(), parent);
     }
 
     @Override

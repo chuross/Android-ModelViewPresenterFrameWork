@@ -7,16 +7,18 @@ import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import com.github.chuross.library.mvp.view.template.Template;
 
-public class ActivityPresenter<ACTIVITY extends Activity, TEMPLATE extends Template> implements TemplatePresenter<ACTIVITY, TEMPLATE> {
+public abstract class ActivityPresenter<ACTIVITY extends Activity, TEMPLATE extends Template> implements TemplatePresenter<ACTIVITY, TEMPLATE> {
 
     private ACTIVITY activity;
     private TEMPLATE template;
     private boolean destroyed = false;
 
-    public ActivityPresenter(@NonNull ACTIVITY activity, @NonNull TEMPLATE template) {
+    public ActivityPresenter(@NonNull ACTIVITY activity) {
         this.activity = activity;
-        this.template = template;
+        this.template = createTemplate(activity);
     }
+
+    protected abstract TEMPLATE createTemplate(ACTIVITY activity);
 
     @NonNull
     @Override

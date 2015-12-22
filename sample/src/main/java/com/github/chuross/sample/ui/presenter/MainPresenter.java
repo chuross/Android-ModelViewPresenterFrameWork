@@ -13,7 +13,12 @@ public class MainPresenter extends ActivityPresenter<MainActivity, MainTemplate>
     private static final List<String> TITLES = Arrays.asList("one", "two", "three", "four", "five");
 
     public MainPresenter(@NonNull final MainActivity activity) {
-        super(activity, new MainTemplate(activity));
+        super(activity);
+    }
+
+    @Override
+    protected MainTemplate createTemplate(final MainActivity activity) {
+        return new MainTemplate(activity);
     }
 
     public List<String> getTitles() {

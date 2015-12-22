@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.github.chuross.library.mvp.view.template.NonApplyTemplate;
+import com.github.chuross.library.mvp.view.template.AbstractTemplate;
 import com.github.chuross.sample.R;
 
-public class ListTemplate extends NonApplyTemplate {
+public class ListTemplate extends AbstractTemplate {
 
     @Bind(R.id.list)
     ListView list;

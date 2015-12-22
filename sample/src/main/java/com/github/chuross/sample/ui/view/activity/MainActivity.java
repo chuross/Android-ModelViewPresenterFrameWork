@@ -28,7 +28,6 @@ public class MainActivity extends PresentationActivity<MainPresenter> {
 
         MainTemplate template = getPresenter().getTemplate();
 
-        setContentView(template.getView());
         setSupportActionBar(template.getToolbar());
 
         final List<String> titles = getPresenter().getTitles();

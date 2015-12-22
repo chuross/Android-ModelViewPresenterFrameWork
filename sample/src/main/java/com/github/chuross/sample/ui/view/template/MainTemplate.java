@@ -7,10 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.github.chuross.library.mvp.view.template.NonApplyTemplate;
+import com.github.chuross.library.mvp.view.template.AbstractTemplate;
 import com.github.chuross.sample.R;
 
-public class MainTemplate extends NonApplyTemplate {
+public class MainTemplate extends AbstractTemplate {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;

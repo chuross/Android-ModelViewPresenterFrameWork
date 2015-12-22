@@ -20,7 +20,7 @@ import rx.schedulers.Schedulers;
 
 import java.util.List;
 
-public class ListFragment extends SupportPresentationFragment<ListPresenter, ListTemplate> {
+public class ListFragment extends SupportPresentationFragment<ListPresenter> {
 
     private static final String ARGUMENT_KEY_TITLE = "argument_key_title";
 
@@ -38,15 +38,9 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
         return new ListPresenter(this);
     }
 
-    @NonNull
     @Override
-    public ListTemplate createTemplate(@NonNull final ViewGroup container, @NonNull final Bundle savedInstanceState) {
-        return new ListTemplate(getActivity(), container);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull final ListTemplate template, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(template, savedInstanceState);
+    public void onViewCreated(@Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(savedInstanceState);
 
         final String title = getArguments().getString(ARGUMENT_KEY_TITLE);
 
@@ -56,6 +50,8 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
                 return new ListItemTemplate(getContext(), parent, title);
             }
         };
+
+        ListTemplate template = getPresenter().getTemplate();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             template.getList().setNestedScrollingEnabled(true);

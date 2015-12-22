@@ -8,17 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
-import com.github.chuross.library.mvp.view.template.Template;
 
-public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?, TEMPLATE>, TEMPLATE extends Template> extends Fragment {
+public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?, ?>> extends Fragment {
 
     private PRESENTER presenter;
 
     @NonNull
     public abstract PRESENTER createPresenter();
-
-    @NonNull
-    public abstract TEMPLATE createTemplate(@NonNull final ViewGroup container, @NonNull final Bundle savedInstanceState);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -30,7 +26,7 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        return presenter.createView(createTemplate(container, savedInstanceState));
+        return presenter.createView(container, savedInstanceState);
     }
 
     /**
@@ -40,11 +36,11 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     @Deprecated
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.viewCreated(presenter.getTemplate(), savedInstanceState);
-        onViewCreated(presenter.getTemplate(), savedInstanceState);
+        presenter.viewCreated(savedInstanceState);
+        onViewCreated(savedInstanceState);
     }
 
-    public void onViewCreated(@NonNull TEMPLATE template, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@Nullable Bundle savedInstanceState) {
     }
 
     @Override

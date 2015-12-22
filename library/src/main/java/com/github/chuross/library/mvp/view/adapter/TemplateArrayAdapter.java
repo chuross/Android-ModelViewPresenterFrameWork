@@ -4,14 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import com.github.chuross.library.mvp.view.template.SourceTemplate;
+import com.github.chuross.library.mvp.view.template.ApplicableTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.WeakHashMap;
 
-public abstract class TemplateArrayAdapter<T, TEMPLATE extends SourceTemplate<T>> extends ArrayAdapter<T> {
+public abstract class TemplateArrayAdapter<T, TEMPLATE extends ApplicableTemplate<T>> extends ArrayAdapter<T> {
 
     private List<T> items;
     private final WeakHashMap<View, TEMPLATE> templateMap = new WeakHashMap<>();

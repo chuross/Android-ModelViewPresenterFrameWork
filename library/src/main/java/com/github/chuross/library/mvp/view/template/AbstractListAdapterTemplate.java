@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class AbstractListAdapterTemplate<SOURCE> extends AbstractTemplate implements SourceTemplate<SOURCE> {
+public abstract class AbstractListAdapterTemplate<SOURCE> extends AbstractTemplate implements ApplicableTemplate<SOURCE> {
 
     private SOURCE defaultSource;
 
@@ -38,10 +38,5 @@ public abstract class AbstractListAdapterTemplate<SOURCE> extends AbstractTempla
 
     public SOURCE getDefaultSource() {
         return defaultSource;
-    }
-
-    @Override
-    public void apply() {
-        apply(defaultSource);
     }
 }

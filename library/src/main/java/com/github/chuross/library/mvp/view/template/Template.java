@@ -5,6 +5,4 @@ import android.view.View;
 public interface Template {
 
     View getView();
-
-    void apply();
 }

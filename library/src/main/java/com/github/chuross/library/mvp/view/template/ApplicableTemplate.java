@@ -1,6 +1,6 @@
 package com.github.chuross.library.mvp.view.template;
 
-public interface SourceTemplate<SOURCE> extends Template {
+public interface ApplicableTemplate<SOURCE> extends Template {
 
     void apply(SOURCE source);
 }

@@ -8,13 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
+import com.github.chuross.library.mvp.view.template.Template;
 
-public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?, ?>> extends Fragment {
+public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?>, TEMPLATE extends Template> extends Fragment {
 
     private PRESENTER presenter;
+    private TEMPLATE template;
 
     @NonNull
-    public abstract PRESENTER createPresenter();
+    protected abstract PRESENTER createPresenter();
+
+    @NonNull
+    protected abstract TEMPLATE createTemplate(@NonNull ViewGroup parent, @Nullable Bundle savedInstanceState);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -26,7 +31,9 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        return presenter.createView(container, savedInstanceState);
+        presenter.createView(container, savedInstanceState);
+        template = createTemplate(container, savedInstanceState);
+        return template.getView();
     }
 
     /**
@@ -79,7 +86,13 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
         super.onDestroy();
     }
 
+    @NonNull
     public PRESENTER getPresenter() {
         return presenter;
+    }
+
+    @NonNull
+    public TEMPLATE getTemplate() {
+        return template;
     }
 }

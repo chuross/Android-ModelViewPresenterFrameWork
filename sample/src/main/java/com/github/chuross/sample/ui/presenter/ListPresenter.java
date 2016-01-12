@@ -1,16 +1,11 @@
 package com.github.chuross.sample.ui.presenter;
 
 import android.app.Application;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.ViewGroup;
 import android.widget.Toast;
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
 import com.github.chuross.sample.domain.Item;
 import com.github.chuross.sample.domain.ItemRepository;
 import com.github.chuross.sample.ui.view.fragment.ListFragment;
-import com.github.chuross.sample.ui.view.template.ListTemplate;
 import rx.Observable;
 import rx.Observer;
 import rx.Scheduler;
@@ -22,18 +17,13 @@ import rx.subscriptions.CompositeSubscription;
 
 import java.util.List;
 
-public class ListPresenter extends SupportFragmentPresenter<ListFragment, ListTemplate> {
+public class ListPresenter extends SupportFragmentPresenter<ListFragment> {
 
     private ItemRepository itemRepository = new ItemRepository();
     private CompositeSubscription subscriptions = new CompositeSubscription();
 
     public ListPresenter(final ListFragment fragment) {
         super(fragment);
-    }
-
-    @Override
-    protected ListTemplate createTemplate(@NonNull final ViewGroup parent, @Nullable final Bundle savedInstanceState) {
-        return new ListTemplate(getView().getActivity(), parent);
     }
 
     @Override

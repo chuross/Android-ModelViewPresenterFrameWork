@@ -14,7 +14,7 @@ import com.github.chuross.sample.ui.view.template.MainTemplate;
 
 import java.util.List;
 
-public class MainActivity extends PresentationActivity<MainPresenter> {
+public class MainActivity extends PresentationActivity<MainPresenter, MainTemplate> {
 
     @Override
     @NonNull
@@ -22,11 +22,17 @@ public class MainActivity extends PresentationActivity<MainPresenter> {
         return new MainPresenter(this);
     }
 
+    @NonNull
+    @Override
+    protected MainTemplate createTemplate() {
+        return new MainTemplate(this);
+    }
+
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MainTemplate template = getPresenter().getTemplate();
+        MainTemplate template = getTemplate();
 
         setSupportActionBar(template.getToolbar());
 

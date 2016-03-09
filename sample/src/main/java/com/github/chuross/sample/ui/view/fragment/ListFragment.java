@@ -47,14 +47,9 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
     public void onViewCreated(@Nullable final Bundle savedInstanceState) {
         super.onViewCreated(savedInstanceState);
 
-        final ArrayAdapter<Item> adapter = new BindableArrayAdapter<Item, ListItemAdapterBinding>(getActivity().getApplicationContext()) {
+        final ArrayAdapter<Item> adapter = new BindableArrayAdapter<Item, ListItemAdapterBinding>(getActivity().getApplicationContext(), R.layout.list_item_adapter) {
             @Override
-            protected int getLayoutResourceId() {
-                return R.layout.list_item_adapter;
-            }
-
-            @Override
-            protected void bind(final Item item, final ListItemAdapterBinding binding) {
+            protected void bind(int position, final Item item, final ListItemAdapterBinding binding) {
                 binding.setItem(item);
             }
         };

@@ -17,33 +17,33 @@ public abstract class BindableArrayAdapter<T, BINDING extends ViewDataBinding> e
 
     private List<T> items;
     private final WeakHashMap<View, BINDING> bindMap = new WeakHashMap<>();
+    private int resourceId;
 
-    public BindableArrayAdapter(final Context context) {
-        this(context, new ArrayList<T>());
+    public BindableArrayAdapter(final Context context, int resourceId) {
+        this(context, new ArrayList<T>(), resourceId);
     }
 
-    public BindableArrayAdapter(Context context, T[] items) {
-        this(context, Arrays.asList(items));
+    public BindableArrayAdapter(Context context, T[] items, int resourceId) {
+        this(context, Arrays.asList(items), resourceId);
     }
 
-    public BindableArrayAdapter(Context context, List<T> items) {
+    public BindableArrayAdapter(Context context, List<T> items, int resourceId) {
         super(context, 0, items);
         this.items = items;
+        this.resourceId = resourceId;
     }
 
-    protected abstract int getLayoutResourceId();
-
-    protected abstract void bind(T item, BINDING binding);
+    protected abstract void bind(int position, T item, BINDING binding);
 
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final BINDING binding = bindMap.containsKey(convertView) ? bindMap.get(convertView) : createTemplate(parent);
-        bind(getItem(position), binding);
+        bind(position, getItem(position), binding);
         return binding.getRoot();
     }
 
     private BINDING createTemplate(ViewGroup parent) {
-        BINDING binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), getLayoutResourceId(), parent, false);
+        BINDING binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), resourceId, parent, false);
         bindMap.put(binding.getRoot(), binding);
         return binding;
     }

@@ -1,5 +1,7 @@
 package com.github.chuross.library.mvp.view.fragment;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,18 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter;
-import com.github.chuross.library.mvp.view.template.Template;
 
-public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?>, TEMPLATE extends Template> extends Fragment {
+public abstract class SupportPresentationFragment<PRESENTER extends SupportFragmentPresenter<?>, BINDING extends ViewDataBinding> extends Fragment {
 
     private PRESENTER presenter;
-    private TEMPLATE template;
+    private BINDING binding;
 
     @NonNull
     protected abstract PRESENTER createPresenter();
 
-    @NonNull
-    protected abstract TEMPLATE createTemplate(@NonNull ViewGroup parent, @Nullable Bundle savedInstanceState);
+    protected abstract int getLayoutResourceId();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -32,8 +32,8 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         presenter.createView(container, savedInstanceState);
-        template = createTemplate(container, savedInstanceState);
-        return template.getView();
+        binding = DataBindingUtil.inflate(inflater, getLayoutResourceId(), container, false);
+        return binding.getRoot();
     }
 
     /**
@@ -92,7 +92,7 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     }
 
     @NonNull
-    public TEMPLATE getTemplate() {
-        return template;
+    public BINDING getBinding() {
+        return binding;
     }
 }

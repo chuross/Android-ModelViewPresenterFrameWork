@@ -8,13 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.github.chuross.library.mvp.view.activity.PresentationActivity;
+import com.github.chuross.sample.R;
+import com.github.chuross.sample.databinding.MainActivityBinding;
 import com.github.chuross.sample.ui.presenter.MainPresenter;
 import com.github.chuross.sample.ui.view.fragment.ListFragment;
-import com.github.chuross.sample.ui.view.template.MainTemplate;
 
 import java.util.List;
 
-public class MainActivity extends PresentationActivity<MainPresenter, MainTemplate> {
+public class MainActivity extends PresentationActivity<MainPresenter, MainActivityBinding> {
 
     @Override
     @NonNull
@@ -22,19 +23,18 @@ public class MainActivity extends PresentationActivity<MainPresenter, MainTempla
         return new MainPresenter(this);
     }
 
-    @NonNull
     @Override
-    protected MainTemplate createTemplate() {
-        return new MainTemplate(this);
+    protected int getLayoutResourceId() {
+        return R.layout.main_activity;
     }
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MainTemplate template = getTemplate();
+        MainActivityBinding binding = getBinding();
 
-        setSupportActionBar(template.getToolbar());
+        setSupportActionBar(binding.toolbar);
 
         final List<String> titles = getPresenter().getTitles();
 
@@ -55,10 +55,10 @@ public class MainActivity extends PresentationActivity<MainPresenter, MainTempla
             }
         };
 
-        ViewPager viewPager = template.getViewPager();
+        ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(adapter);
 
-        TabLayout tabLayout = template.getTabLayout();
+        TabLayout tabLayout = binding.tabLayout;
         tabLayout.setTabsFromPagerAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

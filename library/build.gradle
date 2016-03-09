@@ -8,6 +8,10 @@ android {
     defaultConfig {
         minSdkVersion 15
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 uploadArchives {

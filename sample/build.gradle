@@ -37,6 +37,16 @@ android {
 dependencies {
     compile project(':library')
 
+    // common
+    compile('com.github.chuross:common-library:1.0.1') {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+        exclude module: 'slf4j-api'
+        exclude module: 'slf4j-log4j12'
+        exclude module: 'commons-logging'
+    }
+
     compile 'io.reactivex:rxjava:1.0.12'
 
     // android common

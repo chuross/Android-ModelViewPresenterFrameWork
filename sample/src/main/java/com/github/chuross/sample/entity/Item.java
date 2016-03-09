@@ -1,14 +1,10 @@
 package com.github.chuross.sample.entity;
 
-public class Item {
+import com.chuross.common.library.domain.AbstractEntity;
 
-    private final long id;
+public class Item extends AbstractEntity<ItemIdentity, Item> {
 
-    public Item(long id) {
-        this.id = id;
-    }
-
-    public long getId() {
-        return id;
+    public Item(final ItemIdentity identity) {
+        super(identity);
     }
 }

@@ -30,7 +30,7 @@ public abstract class ActivityPresenter<ACTIVITY extends PresentationActivity<?,
     public void resume() {
     }
 
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+    public boolean optionsItemSelect(@NonNull final MenuItem item) {
         return false;
     }
 

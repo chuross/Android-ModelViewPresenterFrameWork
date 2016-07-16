@@ -1,4 +1,4 @@
-package com.github.chuross.sample.domain;
+package com.github.chuross.sample.entity;
 
 import com.chuross.common.library.domain.AbstractIdentity;
 

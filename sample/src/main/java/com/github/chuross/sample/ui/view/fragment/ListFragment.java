@@ -6,21 +6,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import com.github.chuross.library.mvp.view.adapter.TemplateArrayAdapter;
+import com.github.chuross.library.mvp.view.adapter.BindableArrayAdapter;
 import com.github.chuross.library.mvp.view.fragment.SupportPresentationFragment;
-import com.github.chuross.sample.domain.Item;
+import com.github.chuross.sample.R;
+import com.github.chuross.sample.databinding.ListFragmentBinding;
+import com.github.chuross.sample.databinding.ListItemAdapterBinding;
+import com.github.chuross.sample.entity.Item;
 import com.github.chuross.sample.ui.presenter.ListPresenter;
-import com.github.chuross.sample.ui.view.template.ListItemTemplate;
-import com.github.chuross.sample.ui.view.template.ListTemplate;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 import java.util.List;
 
-public class ListFragment extends SupportPresentationFragment<ListPresenter, ListTemplate> {
+public class ListFragment extends SupportPresentationFragment<ListPresenter, ListFragmentBinding> {
 
     private static final String ARGUMENT_KEY_TITLE = "argument_key_title";
 
@@ -38,32 +38,29 @@ public class ListFragment extends SupportPresentationFragment<ListPresenter, Lis
         return new ListPresenter(this);
     }
 
-    @NonNull
     @Override
-    protected ListTemplate createTemplate(@NonNull final ViewGroup parent, @Nullable final Bundle savedInstanceState) {
-        return new ListTemplate(getActivity(), parent);
+    protected int getLayoutResourceId() {
+        return R.layout.list_fragment;
     }
 
     @Override
     public void onViewCreated(@Nullable final Bundle savedInstanceState) {
         super.onViewCreated(savedInstanceState);
 
-        final String title = getArguments().getString(ARGUMENT_KEY_TITLE);
-
-        final ArrayAdapter<Item> adapter = new TemplateArrayAdapter<Item, ListItemTemplate>(getActivity().getApplicationContext()) {
+        final ArrayAdapter<Item> adapter = new BindableArrayAdapter<Item, ListItemAdapterBinding>(getActivity().getApplicationContext(), R.layout.list_item_adapter) {
             @Override
-            protected ListItemTemplate onCreateTemplate(ViewGroup parent) {
-                return new ListItemTemplate(getContext(), parent, title);
+            protected void bind(int position, final Item item, final ListItemAdapterBinding binding) {
+                binding.setItem(item);
             }
         };
 
-        ListTemplate template = getTemplate();
+        ListFragmentBinding binding = getBinding();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            template.getList().setNestedScrollingEnabled(true);
+            binding.list.setNestedScrollingEnabled(true);
         }
-        template.getList().setAdapter(adapter);
-        template.getList().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.list.setAdapter(adapter);
+        binding.list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
                 getPresenter().onListItemClicked(position);

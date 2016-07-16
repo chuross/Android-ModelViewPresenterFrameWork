@@ -1,29 +1,28 @@
 package com.github.chuross.library.mvp.view.activity;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import com.github.chuross.library.mvp.presenter.ActivityPresenter;
-import com.github.chuross.library.mvp.view.template.Template;
 
-public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?>, TEMPLATE extends Template> extends AppCompatActivity {
+public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?>, BINDING extends ViewDataBinding> extends AppCompatActivity {
 
     private PRESENTER presenter;
-    private TEMPLATE template;
+    private BINDING binding;
 
     @NonNull
-    public abstract PRESENTER createPresenter();
+    protected abstract PRESENTER createPresenter();
 
-    @NonNull
-    protected abstract TEMPLATE createTemplate();
+    protected abstract int getLayoutResourceId();
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        template = createTemplate();
-        setContentView(template.getView());
+        binding = DataBindingUtil.setContentView(this, getLayoutResourceId());
         presenter = createPresenter();
         presenter.create(savedInstanceState);
     }
@@ -42,7 +41,7 @@ public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?
 
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        return presenter.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        return presenter.optionsItemSelect(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -74,7 +73,7 @@ public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?
         return presenter;
     }
 
-    public TEMPLATE getTemplate() {
-        return template;
+    public BINDING getBinding() {
+        return binding;
     }
 }

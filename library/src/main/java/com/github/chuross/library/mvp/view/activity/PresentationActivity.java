@@ -22,10 +22,10 @@ public abstract class PresentationActivity<PRESENTER extends ActivityPresenter<?
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = createPresenter();
-        presenter.create(savedInstanceState);
         template = createTemplate();
         setContentView(template.getView());
+        presenter = createPresenter();
+        presenter.create(savedInstanceState);
     }
 
     @Override

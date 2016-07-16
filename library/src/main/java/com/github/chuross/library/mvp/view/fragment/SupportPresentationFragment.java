@@ -31,8 +31,8 @@ public abstract class SupportPresentationFragment<PRESENTER extends SupportFragm
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        presenter.createView(container, savedInstanceState);
         template = createTemplate(container, savedInstanceState);
+        presenter.createView(container, savedInstanceState);
         return template.getView();
     }
 
